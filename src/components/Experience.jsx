@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import iitbhilai from "../assets/iitbhilai.png";
+import iiith from "../assets/iiith.jpeg";
 
 const Experience = () => {
   const [selectedExperience, setSelectedExperience] = useState(null);
@@ -18,7 +20,7 @@ const Experience = () => {
         "Program test and development scripts using Hardhat, ensuring code reliability and functionality.",
       ],
       location: "Hybrid",
-      logo: "/src/assets/iitbhilai.png", // Updated logo path
+      logo: iitbhilai, // Updated logo path
     },
     {
       institute:
@@ -32,7 +34,7 @@ const Experience = () => {
         "Optimized power consumption through Task Scheduling on Raspberry Pi.",
       ],
       location: "Hybrid",
-      logo: "/src/assets/iiith.jpeg", // Updated logo path
+      logo: iiith, // Updated logo path
     },
   ];
 
@@ -91,7 +93,7 @@ const Experience = () => {
                 </div>
 
                 {/* Right Side - Logo */}
-                <div className="h-32 w-32 overflow-hidden flex items-center justify-center">
+                <div className="h-full overflow-hidden flex items-center justify-center">
                   <img
                     src={experience.logo}
                     alt={experience.institute}
@@ -119,11 +121,11 @@ const Experience = () => {
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
+                  width="100"
+                  height="10"
                   viewBox="0 0 24 24"
                   fill="currentColor"
-                  className="w-5 h-5"
+                  className="w-3 h-3 text-gray-500"
                 >
                   <path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z" />
                 </svg>

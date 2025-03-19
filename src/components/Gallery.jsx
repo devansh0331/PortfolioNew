@@ -1,12 +1,17 @@
 import React from "react";
 import { motion } from "framer-motion";
+import v1 from "../assets/v1.jpg";
+import h1 from "../assets/h1.jpeg";
+import v2 from "../assets/v2.jpeg";
+import v3 from "../assets/v3.jpeg";
+import v5 from "../assets/v5.jpeg";
 
 const Gallery = () => {
   // Sample Gallery data (replace with your own images or content)
   const GalleryItems = [
     {
       id: 1,
-      image: "/src/assets/v1.jpg", // Update with correct path
+      image: v1, // Update with correct path
       title: "Project 1",
       description:
         "A blockchain-based platform for peer-to-peer solar energy trading.",
@@ -14,7 +19,7 @@ const Gallery = () => {
     },
     {
       id: 2,
-      image: "/src/assets/h1.jpeg", // Update with correct path
+      image: h1, // Update with correct path
       title: "Project 2",
       description:
         "Enhancing security protocols for unmanned aerial vehicles (UAVs).",
@@ -22,21 +27,21 @@ const Gallery = () => {
     },
     {
       id: 3,
-      image: "/src/assets/v2.jpeg", // Update with correct path
+      image: v2, // Update with correct path
       title: "Project 3",
       description: "Developing advanced security measures for UAVs.",
       className: "md:col-span-1 md:row-span-2", // Small square frame
     },
     {
       id: 4,
-      image: "/src/assets/v3.jpeg", // Update with correct path
+      image: v3, // Update with correct path
       title: "Project 4",
       description: "Creating a decentralized platform for energy trading.",
       className: "md:col-span-1 md:row-span-1 ", // Medium vertical frame
     },
     {
       id: 5,
-      image: "/src/assets/v5.jpeg", // Placeholder image
+      image: v5, // Placeholder image
       title: "Project 5",
       description:
         "Implementing encryption protocols for secure communication.",

@@ -1,4 +1,5 @@
 import React from "react";
+import about from "../assets/about.jpeg";
 
 const About = () => {
   return (
@@ -44,7 +45,7 @@ const About = () => {
             {/* Right Half - Picture */}
             <div className="flex justify-center md:justify-end">
               <img
-                src="/src/assets/about.jpeg" // Update the path to your image
+                src={about} // Update the path to your image
                 alt="Your Name"
                 className="rounded-lg shadow-lg w-full max-w-sm md:max-w-md" // Smaller image size
               />

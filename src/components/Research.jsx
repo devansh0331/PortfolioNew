@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import logo from "../assets/logo.png";
+import drone from "../assets/drone.jpeg";
 
 const Research = () => {
   const [selectedProject, setSelectedProject] = useState(null);
@@ -19,7 +21,7 @@ const Research = () => {
       title: "Solar Energy Trading System",
       description:
         "A blockchain-based platform for peer-to-peer solar energy trading.",
-      image: "/src/assets/logo.png", // Updated image path
+      image: logo, // Updated image path
       details: `This project focuses on creating a decentralized platform where users can trade solar energy efficiently using blockchain technology. 
       
       The platform aims to reduce energy costs, promote renewable energy usage, and provide a transparent and secure way for energy transactions. 
@@ -31,7 +33,7 @@ const Research = () => {
       title: "UAV Security",
       description:
         "Enhancing security protocols for unmanned aerial vehicles (UAVs).",
-      image: "/src/assets/drone.jpeg", // Updated image path
+      image: drone, // Updated image path
       details: `This project involves developing advanced security measures for UAVs to prevent unauthorized access and ensure safe operations in sensitive environments. 
       
       The focus is on implementing encryption protocols, secure communication channels, and real-time monitoring systems. 
