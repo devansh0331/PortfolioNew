@@ -80,7 +80,7 @@ const SendETH = () => {
 
   return (
     <div className="w-full bg-primary flex items-center justify-center py-12 ">
-      <div className="w-full rounded-md  bg-secondary lg:w-3/4 py-8 px-4 sm:px-6 lg:px-8 text-center">
+      <div className="w-11/12 rounded-md  bg-secondary lg:w-3/4 py-8 px-4 sm:px-6 lg:px-8 text-center">
         <h2 className="text-2xl font-thin text-white mb-4">
           Found me Interesting so far?{" "}
           <span className="text-contrast">Send Me ETH</span> !
