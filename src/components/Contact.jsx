@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { db } from "../firebase"; // Import Firestore
+import { collection, addDoc } from "firebase/firestore"; // Firestore functions
+import { toast } from "react-toastify";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -44,34 +47,62 @@ const Contact = () => {
   };
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const formErrors = validateForm();
     if (Object.keys(formErrors).length > 0) {
       setErrors(formErrors);
+      toast.error("Please fill out all required fields correctly.");
     } else {
-      // Simulate form submission (replace with actual API call)
-      setIsSubmitted(true);
-      setTimeout(() => {
-        setIsSubmitted(false);
-        setFormData({
-          name: "",
-          email: "",
-          purpose: "",
-          message: "",
-          projectTitle: "",
-          tech: "",
-          projectDetail: "",
-          meetingPurpose: "",
-          meetingDate: "",
-          technicalRequirement: "",
-          projectProposal: null,
+      try {
+        // Add form data to Firestore
+        const docRef = await addDoc(collection(db, "contacts"), {
+          name: formData.name,
+          email: formData.email,
+          purpose: formData.purpose,
+          message: formData.message,
+          projectTitle: formData.projectTitle,
+          tech: formData.tech,
+          projectDetail: formData.projectDetail,
+          meetingPurpose: formData.meetingPurpose,
+          meetingDate: formData.meetingDate,
+          technicalRequirement: formData.technicalRequirement,
+          projectProposal: formData.projectProposal
+            ? formData.projectProposal.name
+            : null,
+          timestamp: new Date(),
         });
-        setErrors({});
-      }, 3000); // Reset form after 3 seconds
+
+        console.log("Document written with ID: ", docRef.id);
+
+        // Show success toast
+        toast.success("Thank you for reaching out! I'll get back to you soon.");
+
+        // Reset form and show success message
+        setIsSubmitted(true);
+        setTimeout(() => {
+          setIsSubmitted(false);
+          setFormData({
+            name: "",
+            email: "",
+            purpose: "",
+            message: "",
+            projectTitle: "",
+            tech: "",
+            projectDetail: "",
+            meetingPurpose: "",
+            meetingDate: "",
+            technicalRequirement: "",
+            projectProposal: null,
+          });
+          setErrors({});
+        }, 3000); // Reset form after 3 seconds
+      } catch (error) {
+        console.error("Error adding document: ", error);
+        toast.error("An error occurred. Please try again.");
+      }
     }
   };
-
   return (
     <div
       id="contact"
@@ -234,13 +265,13 @@ const Contact = () => {
                     className="w-full p-3 bg-primary text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-contrast"
                   >
                     <option value="">Select Purpose</option>
-                    <option value="Project Advice">Project Advice</option>
-                    <option value="Schedule a Meeting">
-                      Schedule a Meeting
+                    <option value="Book a Meeting">📅 Book a Meeting</option>
+                    <option value="Freelance">🤝 Freelance</option>
+                    <option value="General Inquiry">📩 General Inquiry</option>
+                    <option value="Project Consultation">
+                      🛠️ Project Consultation
                     </option>
-                    <option value="Freelance">Freelance</option>
                     {/* <option value="Hire">Hire</option> */}
-                    <option value="Other">Other</option>
                   </select>
                   {errors.purpose && (
                     <p className="text-red-500 text-sm mt-2">
@@ -250,7 +281,7 @@ const Contact = () => {
                 </div>
 
                 {/* Conditional Fields Based on Purpose */}
-                {formData.purpose === "Project Advice" && (
+                {formData.purpose === "Project Consultation" && (
                   <>
                     <div>
                       <label
@@ -309,7 +340,7 @@ const Contact = () => {
                   </>
                 )}
 
-                {formData.purpose === "Schedule a Meeting" && (
+                {formData.purpose === "Book a Meeting" && (
                   <>
                     <div>
                       <label
@@ -385,7 +416,7 @@ const Contact = () => {
                   </>
                 )}
 
-                {formData.purpose === "Other" && (
+                {formData.purpose === "General Inquiry" && (
                   <div>
                     <label
                       htmlFor="message"

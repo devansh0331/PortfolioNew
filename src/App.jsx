@@ -8,6 +8,10 @@ import SendETH from "./components/SendETH";
 import Gallery from "./components/Gallery";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import AreasOfInterest from "./components/AreasOfInterest";
+import Testimonials from "./components/Testimonials";
 
 function App() {
   return (
@@ -18,10 +22,13 @@ function App() {
         <Research />
         <QuoteSection />
         <Experience />
+        <AreasOfInterest />
         <SendETH />
         <Gallery />
+        <Testimonials />
         <Contact />
         <Footer />
+        <ToastContainer />
         <Routes>
           {/* <Route path="/" element={<TodoList />} /> */}
           {/* <Route path="/" element={<Navbar />} /> */}
