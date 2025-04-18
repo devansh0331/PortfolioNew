@@ -152,7 +152,7 @@ const Testimonials = () => {
                   <div className="bg-secondary rounded-lg shadow-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow duration-300">
                     {/* Content */}
                     <div className="p-6 text-center h-96 flex flex-col justify-between">
-                      <p className="text-gray-300 text-base italic">
+                      <p className="text-gray-300 text-lg  italic">
                         “{testimonial.feedback}”
                       </p>
                       <div>

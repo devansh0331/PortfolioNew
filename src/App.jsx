@@ -22,7 +22,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/testimonial-form" element={<TestimonialForm />} />
+          <Route path="/add-testimonial" element={<TestimonialForm />} />
           {/* Admin Routes */}
           <Route path="/admin/login" element={<Login />} />
           <Route
