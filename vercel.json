@@ -2,7 +2,7 @@
   "routes": [
     { "src": "/", "dest": "/" },
     { "src": "/testimonial-form", "dest": "/" },
-    { "src": "/admin", "dest": "/" }
+    { "src": "/admin", "dest": "/" },
     { "src": "/admin/(.*)", "dest": "/" }
   ]
 }
