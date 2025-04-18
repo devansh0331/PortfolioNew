@@ -1,9 +1,8 @@
 {
   "routes": [
     { "src": "/", "dest": "/" },
-    { "src": "/pay", "dest": "/pay" },
-    { "src": "/payment", "dest": "/payment" },
-    { "src": "/energyRecords", "dest": "/energyRecords" },
-    { "src": "/about", "dest": "/about" }
+    { "src": "/testimonial-form", "dest": "/" },
+    { "src": "/admin", "dest": "/" }
+    { "src": "/admin/(.*)", "dest": "/" }
   ]
 }

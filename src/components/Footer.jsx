@@ -13,7 +13,7 @@ const Footer = () => {
               A final-year student at BIT Durg, passionate about technology and
               innovation. Let's connect and create something amazing together!
             </p>
-            <a href="#about" className="text-contrast">
+            <a href="" className="text-contrast">
               Get resume
             </a>{" "}
             !
@@ -24,7 +24,7 @@ const Footer = () => {
             <h3 className="text-lg font-bold">
               Quick <span className="text-contrast">Links</span>
             </h3>
-            <ul className="space-y-2">
+            {/* <ul className="space-y-2">
               <li>
                 <a
                   href="#about"
@@ -65,7 +65,7 @@ const Footer = () => {
                   Contact
                 </a>
               </li>
-            </ul>
+            </ul> */}
           </div>
 
           {/* Email Section */}

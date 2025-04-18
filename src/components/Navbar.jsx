@@ -80,12 +80,12 @@ const Navbar = () => {
             {/* Right Side - Links */}
             <div className="hidden md:flex space-x-6">
               {[
-                "About",
-                "Experience",
-                "Research",
-                "Gallery",
+                // "About",
+                // "Experience",
+                // "Research",
+                // "Gallery",
                 // "Testimonial",
-                "Contact",
+                // "Contact",
               ].map((item, index) => (
                 <a
                   key={index}

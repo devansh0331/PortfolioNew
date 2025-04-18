@@ -1,38 +1,48 @@
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import About from "./components/About";
-import Research from "./components/Research";
-import Experience from "./components/Experience";
-import QuoteSection from "./components/QuoteSection";
-import SendETH from "./components/SendETH";
-import Gallery from "./components/Gallery";
-import Contact from "./components/Contact";
+
 import Footer from "./components/Footer";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import AreasOfInterest from "./components/AreasOfInterest";
-import Testimonials from "./components/Testimonials";
+
+import TestimonialForm from "./pages/TestimonialForm";
+import Home from "./pages/Home";
+import Login from "./pages/admin/Login";
+import Dashboard from "./pages/admin/Dashboard";
+import Testimonials from "./pages/admin/Testimonials";
+import Contacts from "./pages/admin/Contacts";
+import PrivateRoute from "./components/PrivateRoute";
+import AdminLayout from "./components/AdminLayout";
+import Projects from "./pages/admin/Projects";
 
 function App() {
   return (
     <div className="bg-off">
       <div className="">
         <Navbar />
-        <About />
-        <Research />
-        <QuoteSection />
-        <Experience />
-        <AreasOfInterest />
-        <SendETH />
-        <Gallery />
-        <Testimonials />
-        <Contact />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/testimonial-form" element={<TestimonialForm />} />
+          {/* Admin Routes */}
+          <Route path="/admin/login" element={<Login />} />
+          <Route
+            path="/admin"
+            element={
+              <PrivateRoute>
+                <AdminLayout />
+              </PrivateRoute>
+            }
+          >
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="testimonials" element={<Testimonials />} />
+            <Route path="contacts" element={<Contacts />} />
+            <Route path="projects" element={<Projects />} />
+            <Route index element={<Dashboard />} />
+          </Route>
+        </Routes>
+
         <Footer />
         <ToastContainer />
-        <Routes>
-          {/* <Route path="/" element={<TodoList />} /> */}
-          {/* <Route path="/" element={<Navbar />} /> */}
-        </Routes>
       </div>
     </div>
   );

@@ -1,52 +1,65 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import {
+  collection,
+  query,
+  where,
+  onSnapshot,
+  orderBy,
+} from "firebase/firestore";
+import { db } from "../firebase"; // Adjust path as needed
 
 const Testimonials = () => {
-  // Testimonial data
-  const testimonials = [
-    {
-      name: "John Doe",
-      role: "CEO, Tech Innovations",
-      feedback:
-        "Devansh is an exceptional developer with a deep understanding of blockchain technology. His work on our project was top-notch!",
-      linkedin: "https://www.linkedin.com/in/johndoe", // Replace with actual LinkedIn URL
-    },
-    {
-      name: "Jane Smith",
-      role: "CTO, Quantum Solutions",
-      feedback:
-        "Working with Devansh was a pleasure. His expertise in quantum cryptography helped us build a secure communication system.",
-      linkedin: "https://www.linkedin.com/in/janesmith", // Replace with actual LinkedIn URL
-    },
-    {
-      name: "Alice Johnson",
-      role: "Lead Developer, WebWorks",
-      feedback:
-        "Devansh's skills in web development are unmatched. He delivered a scalable and responsive web application for our team.",
-      linkedin: "https://www.linkedin.com/in/alicejohnson", // Replace with actual LinkedIn URL
-    },
-    {
-      name: "Bob Brown",
-      role: "Founder, AI Labs",
-      feedback:
-        "Devansh's knowledge of machine learning is impressive. He helped us implement cutting-edge AI solutions.",
-      linkedin: "https://www.linkedin.com/in/bobbrown", // Replace with actual LinkedIn URL
-    },
-    {
-      name: "Charlie Davis",
-      role: "Product Manager, FinTech Inc.",
-      feedback:
-        "Devansh is a great collaborator. His attention to detail and problem-solving skills are exceptional.",
-      linkedin: "https://www.linkedin.com/in/charliedavis", // Replace with actual LinkedIn URL
-    },
-  ];
-
-  // State to manage the current index of the testimonial
+  const [testimonials, setTestimonials] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Fetch testimonials from Firebase
+  useEffect(() => {
+    setLoading(true);
+    try {
+      const q = query(
+        collection(db, "testimonials"),
+        where("approved", "==", true)
+        // Removed orderBy to avoid index requirement
+        // If you need sorting, create the index as explained above
+      );
+
+      const unsubscribe = onSnapshot(
+        q,
+        (querySnapshot) => {
+          const testimonialsData = [];
+          querySnapshot.forEach((doc) => {
+            testimonialsData.push({ id: doc.id, ...doc.data() });
+          });
+          // Sort locally if needed (less efficient but works without index)
+          testimonialsData.sort(
+            (a, b) => b.createdAt?.toMillis() - a.createdAt?.toMillis()
+          );
+          setTestimonials(testimonialsData);
+          setLoading(false);
+        },
+        (err) => {
+          console.error("Error fetching testimonials: ", err);
+          setError("Failed to load testimonials. Please try again later.");
+          setLoading(false);
+        }
+      );
+
+      return () => unsubscribe();
+    } catch (err) {
+      console.error("Error setting up query: ", err);
+      setError("Failed to initialize testimonials query.");
+      setLoading(false);
+    }
+  }, []);
 
   // Function to handle automatic sliding
   useEffect(() => {
+    if (testimonials.length === 0) return;
+
     const interval = setInterval(() => {
       if (!isHovered) {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
@@ -58,8 +71,12 @@ const Testimonials = () => {
 
   // Function to get the visible testimonials
   const getVisibleTestimonials = () => {
+    if (testimonials.length === 0) return [];
+
     const visibleTestimonials = [];
-    for (let i = 0; i < 3; i++) {
+    const count = Math.min(3, testimonials.length); // Show up to 3 testimonials
+
+    for (let i = 0; i < count; i++) {
       const index = (currentIndex + i) % testimonials.length;
       visibleTestimonials.push(testimonials[index]);
     }
@@ -68,6 +85,7 @@ const Testimonials = () => {
 
   // Function to navigate left
   const handleLeftClick = () => {
+    if (testimonials.length === 0) return;
     setCurrentIndex(
       (prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length
     );
@@ -75,8 +93,33 @@ const Testimonials = () => {
 
   // Function to navigate right
   const handleRightClick = () => {
+    if (testimonials.length === 0) return;
     setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-primary">
+        <div className="text-white">Loading testimonials...</div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-primary">
+        <div className="text-white">{error}</div>
+      </div>
+    );
+  }
+
+  if (testimonials.length === 0) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-primary">
+        <div className="text-white">No testimonials available yet.</div>
+      </div>
+    );
+  }
 
   return (
     <div
@@ -97,31 +140,35 @@ const Testimonials = () => {
             <AnimatePresence initial={false}>
               {getVisibleTestimonials().map((testimonial, index) => (
                 <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: 100 }} // Slide in from the right
-                  animate={{ opacity: 1, x: 0 }} // Stay in place
-                  exit={{ opacity: 0, x: -100 }} // Slide out to the left
+                  key={`${testimonial.name}-${index}`}
+                  initial={{ opacity: 0, x: 100 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -100 }}
                   transition={{ duration: 0.5 }}
-                  className="flex-shrink-0 w-full " // Added padding to prevent cutting
+                  className="flex-shrink-0 w-full"
                   onMouseEnter={() => setIsHovered(true)}
                   onMouseLeave={() => setIsHovered(false)}
                 >
                   <div className="bg-secondary rounded-lg shadow-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow duration-300">
                     {/* Content */}
                     <div className="p-6 text-center h-96 flex flex-col justify-between">
-                      <p className="text-gray-300 text-lg italic">
+                      <p className="text-gray-300 text-base italic">
                         “{testimonial.feedback}”
                       </p>
                       <div>
                         <h2 className="text-2xl font-bold text-white mb-2">
-                          <a
-                            href={testimonial.linkedin}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="hover:text-contrast transition duration-300"
-                          >
-                            {testimonial.name}
-                          </a>
+                          {testimonial.linkedin ? (
+                            <a
+                              href={testimonial.linkedin}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="hover:text-contrast transition duration-300"
+                            >
+                              {testimonial.name}
+                            </a>
+                          ) : (
+                            testimonial.name
+                          )}
                         </h2>
                         <p className="text-gray-500">{testimonial.role}</p>
                       </div>
@@ -134,20 +181,22 @@ const Testimonials = () => {
         </div>
 
         {/* Navigation Buttons */}
-        <div className="flex justify-center mt-8 space-x-4">
-          <button
-            onClick={handleLeftClick}
-            className="px-6 py-2 bg-contrast text-white rounded-lg hover:bg-blue-600 transition duration-300"
-          >
-            &larr; Previous
-          </button>
-          <button
-            onClick={handleRightClick}
-            className="px-6 py-2 bg-contrast text-white rounded-lg hover:bg-blue-600 transition duration-300"
-          >
-            Next &rarr;
-          </button>
-        </div>
+        {testimonials.length > 1 && (
+          <div className="flex justify-center mt-8 space-x-4">
+            <button
+              onClick={handleLeftClick}
+              className="px-6 py-2 bg-contrast text-white rounded-lg hover:bg-blue-600 transition duration-300"
+            >
+              &larr; Previous
+            </button>
+            <button
+              onClick={handleRightClick}
+              className="px-6 py-2 bg-contrast text-white rounded-lg hover:bg-blue-600 transition duration-300"
+            >
+              Next &rarr;
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
