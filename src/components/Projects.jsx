@@ -5,7 +5,7 @@ import project2 from "../assets/drone.jpeg";
 import project3 from "../assets/drone.jpeg";
 import { FiGithub, FiExternalLink } from "react-icons/fi";
 import { FaReact, FaNodeJs, FaEthereum } from "react-icons/fa";
-import { SiSolidity, SiTailwindcss, SiFirebase } from "react-icons/si";
+import { SiSolidity, SiTailwindcss, SiFirebase, SiMongodb } from "react-icons/si";
 
 const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
@@ -28,11 +28,11 @@ const Projects = () => {
         "Token-based payment system",
         "70% more secure than traditional systems",
       ],
-      githubUrl: "https://github.com/yourusername/solar-trading",
-      liveUrl: "https://solartrading.example.com",
+      // githubUrl: "https://github.com/devansh0331/Solar-E-Corp.git",
+      liveUrl: "https://solar-e-corp.vercel.app/",
       category: "Blockchain",
     },
-    {
+   /* {
       title: "Quantum-Secure UAV Communication",
       description:
         "Implementation of post-quantum cryptography for secure drone communication systems with optimized power consumption.",
@@ -55,29 +55,80 @@ const Projects = () => {
       liveUrl: null, // No live demo available
       category: "Quantum Cryptography",
     },
+    */
     {
-      title: "AI-Powered Financial Dashboard",
+      title: "Veldora",
       description:
-        "Interactive dashboard with machine learning predictions for stock market trends and portfolio optimization.",
+        " Discover Your NFT Adventure: Stake, Upgrade, and Earn Rewards",
+      image: project3,
+      technologies: [
+        { name: "React", icon: <FaReact className="text-blue-400" /> },
+        { name: "Node.js", icon: <FaNodeJs className="text-green-500" /> },
+    
+         { name: "Ethereum", icon: <FaEthereum className="text-purple-400" /> },
+          { name: "Solidity", icon: <SiSolidity className="text-gray-300" /> },
+          {
+          name: "ERC721",
+          icon: <span className="text-orange-400">ERC721</span>,
+        },
+      ],
+      features: [
+        "Users stake NFTs of varying rarities to earn points, with higher rarities yielding better rewards.   ",
+        "Supports upgrades using in-game items to boost NFT rarity.",
+        "Interactive UI with wallet integration and animated visual feedback for staking/minting actions. ",
+        
+      ],
+      // githubUrl: "https://github.com/yourusername/finance-dashboard",
+      liveUrl: "https://veldora-nft.vercel.app/",
+      category: "Blockchain",
+    },
+    {
+      title: "Medc",
+      description:
+        " Connecting Careers, Healing Lives",
       image: project3,
       technologies: [
         { name: "React", icon: <FaReact className="text-blue-400" /> },
         { name: "Node.js", icon: <FaNodeJs className="text-green-500" /> },
         {
-          name: "TensorFlow",
-          icon: <span className="text-orange-400">TF</span>,
+          name: "Express",
+          icon: <span className="text-orange-400">Ex</span>,
+        },
+          {
+          name: "MongoDB",
+          icon: <span className="text-orange-400">MDB</span>,
         },
       ],
       features: [
-        "Real-time market data visualization",
-        "ML-based trend prediction",
-        "Portfolio risk assessment",
-        "85% prediction accuracy",
+        "Simplifying the Job Search",
+        "Networking Opportunities by connecting with peers, mentors, and industry leaders.",
+        "The blogs section provides resources and insights.",
+        
       ],
-      githubUrl: "https://github.com/yourusername/finance-dashboard",
-      liveUrl: "https://finance.example.com",
-      category: "Machine Learning",
+      // githubUrl: "https://github.com/yourusername/finance-dashboard",
+      liveUrl: "https://www.medcofficial.com/",
+      category: "Web Development",
     },
+    {
+  title: "TEDxBITD",
+  description: "Empowering Ideas: Nominate Speakers, Join the Team, and Secure Your Tickets",
+  image: project3, // (e.g., your college TEDx banner)
+  technologies: [
+    { name: "React", icon: <FaReact className="text-blue-500" /> },
+    { name: "Node.js", icon: <FaNodeJs className="text-green-600" /> },
+    { name: "MongoDB", icon: <SiMongodb className="text-green-400" /> },
+  
+  ],
+  features: [
+    "Speaker & Sponsor Nominations: Submit proposals for TEDx talks or partnerships.",
+    "Team Registrations: Volunteer as organizers, designers, or content creators.",
+   
+    "Event Schedule: Interactive timeline of talks and workshops.",
+    "Admin Dashboard: Manage submissions, tickets, and approvals.",
+  ],
+  liveUrl: "https://tedxbitd.in/", // (Your actual URL)
+  category: "Web Development",
+}
   ];
 
   // Animation variants

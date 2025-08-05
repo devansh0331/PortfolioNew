@@ -12,9 +12,9 @@ import Projects from "../components/Projects";
 
 function Home() {
   return (
-    <div className="min-h-[70vh] bg-primary flex items-center justify-center">
+    <div className="min-h-[70vh] bg-primary flex flex-col items-center justify-center">
       {" "}
-      {/* <About />
+      <About />
       <Research />
       <QuoteSection />
       <Experience />
@@ -23,10 +23,10 @@ function Home() {
       <SendETH />
       <Gallery />
       <Testimonials />
-      <Contact /> */}
-      <p className="text-white font-bold text-3xl">
+      <Contact />
+      {/* <p className="text-white font-bold text-3xl">
         Website will be <span className="text-contrast">revealed</span> soon
-      </p>
+      </p> */}
     </div>
   );
 }

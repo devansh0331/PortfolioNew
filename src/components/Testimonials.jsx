@@ -152,11 +152,11 @@ const Testimonials = () => {
                   <div className="bg-secondary rounded-lg shadow-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow duration-300">
                     {/* Content */}
                     <div className="p-6 text-center h-96 flex flex-col justify-between">
-                      <p className="text-gray-300 text-lg  italic">
+                      <p className="text-gray-300 text-base  italic">
                         “{testimonial.feedback}”
                       </p>
                       <div>
-                        <h2 className="text-2xl font-bold text-white mb-2">
+                        <h2 className="text-xl font-bold text-white mb-2">
                           {testimonial.linkedin ? (
                             <a
                               href={testimonial.linkedin}
@@ -170,7 +170,7 @@ const Testimonials = () => {
                             testimonial.name
                           )}
                         </h2>
-                        <p className="text-gray-500">{testimonial.role}</p>
+                        <p className="text-gray-500 text-sm">{testimonial.role}</p>
                       </div>
                     </div>
                   </div>
