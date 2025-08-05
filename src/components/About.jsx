@@ -24,8 +24,8 @@ const About = () => {
               </p>
               {/* Download Resume Button */}
               <a
-                href="/path/to/your-resume.pdf" // Update with the correct path to your resume
-                download="YourName_Resume.pdf"
+                href="src\assets\Resume_.pdf" // Update with the correct path to your resume
+                download="Devansh_Resume.pdf"
                 className="inline-flex items-center px-6 py-3 bg-contrast text-white font-semibold rounded-lg hover:bg-blue-600 transition duration-300"
               >
                 <svg
@@ -46,7 +46,7 @@ const About = () => {
             <div className="flex justify-center md:justify-end">
               <img
                 src={about} // Update the path to your image
-                alt="Your Name"
+                alt="Devansh"
                 className="rounded-lg shadow-lg w-full max-w-sm md:max-w-md" // Smaller image size
               />
             </div>
