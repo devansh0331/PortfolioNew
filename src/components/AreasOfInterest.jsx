@@ -16,12 +16,12 @@ const AreasOfInterest = () => {
         "Investigating the intersection of quantum computing and cryptography to build secure communication systems.",
       icon: "🔒", // Optional: Replace with an image or icon
     },
-    {
-      title: "Machine Learning",
-      description:
-        "Building intelligent systems using machine learning algorithms for data analysis, predictions, and automation.",
-      icon: "🤖", // Optional: Replace with an image or icon
-    },
+    // {
+    //   title: "Machine Learning",
+    //   description:
+    //     "Building intelligent systems using machine learning algorithms for data analysis, predictions, and automation.",
+    //   icon: "🤖", // Optional: Replace with an image or icon
+    // },
     {
       title: "Web Development",
       description:
@@ -52,7 +52,7 @@ const AreasOfInterest = () => {
         </div>
 
         {/* Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {areas.map((area, index) => (
             <motion.div
               key={index}
