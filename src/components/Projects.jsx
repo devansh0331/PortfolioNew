@@ -202,9 +202,17 @@ const Projects = () => {
                 </span>
 
                 {/* Title and Description */}
+                {project.title != "TEDxBITD" ?  <h2 className="text-xl font-bold text-white mb-2">
+                  {project.title == "TedxBITD" ? project.title: project.title}
+                </h2> : <>
                 <h2 className="text-xl font-bold text-white mb-2">
                   {project.title}
                 </h2>
+                <span className="text-gray-500 text-sm italic">(Now managed by TedxBITD Technical Team)</span>
+                <br/>
+                
+                </> 
+                }
                 <p className="text-gray-300 mb-4">{project.description}</p>
 
                 {/* Technologies */}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import v1 from "../assets/v1.jpg";
 import h1 from "../assets/h1.jpeg";
@@ -7,99 +7,84 @@ import v3 from "../assets/v3.jpeg";
 import v5 from "../assets/v5.jpeg";
 
 const Gallery = () => {
-  // Sample Gallery data (replace with your own images or content)
+  const [selectedImage, setSelectedImage] = useState(null);
+
   const GalleryItems = [
-    {
-      id: 1,
-      image: v1, // Update with correct path
-      title: "Project 1",
-      description:
-        "A blockchain-based platform for peer-to-peer solar energy trading.",
-      className: "md:col-span-2 md:row-span-2", // Medium vertical frame
-    },
-    {
-      id: 2,
-      image: h1, // Update with correct path
-      title: "Project 2",
-      description:
-        "Enhancing security protocols for unmanned aerial vehicles (UAVs).",
-      className: "md:col-span-1 md:row-span-1", // Small square frame
-    },
-    {
-      id: 3,
-      image: v2, // Update with correct path
-      title: "Project 3",
-      description: "Developing advanced security measures for UAVs.",
-      className: "md:col-span-1 md:row-span-2", // Small square frame
-    },
-    {
-      id: 4,
-      image: v3, // Update with correct path
-      title: "Project 4",
-      description: "Creating a decentralized platform for energy trading.",
-      className: "md:col-span-1 md:row-span-1 ", // Medium vertical frame
-    },
-    {
-      id: 5,
-      image: v5, // Placeholder image
-      title: "Project 5",
-      description:
-        "Implementing encryption protocols for secure communication.",
-      className: "md:col-span-1 md:row-span-1", // Small square frame
-    },
+    { id: 1, image: v1, className: "md:col-span-2 md:row-span-2" },
+    { id: 2, image: h1, className: "md:col-span-1 md:row-span-1" },
+    { id: 3, image: v2, className: "md:col-span-1 md:row-span-2" },
+    { id: 4, image: v3, className: "md:col-span-1 md:row-span-1" },
+    { id: 5, image: v5, className: "md:col-span-1 md:row-span-1" },
   ];
 
-  // Animation variants for cards
   const cardVariants = {
-    hidden: { opacity: 0, y: 50 }, // Start slightly below and invisible
-    visible: { opacity: 1, y: 0 }, // Move up and fade in
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 }
   };
 
   return (
-    <div
-      id="gallery"
-      className="h-screen flex items-center justify-center bg-primary py-12"
-    >
-      {/* Container with 3/4 width for large devices */}
-      <div className="w-full lg:w-3/4 mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Heading and Underline */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-white mb-4">Gallery</h1>
-          <div className="w-20 h-1 bg-contrast mx-auto"></div>
-        </div>
+    <div id="gallery" className="h-screen lg:w-3/4 w-5/6 bg-primary flex flex-col">
+      {/* Title Section */}
+      <div className="text-center pt-8 pb-4">
+        <h1 className="text-3xl font-bold text-white">Gallery</h1>
+        <div className="w-20 h-1 bg-contrast mx-auto mt-2"></div>
+      </div>
 
-        {/* Bento Grid Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 h-[calc(100vh-20rem)]">
-          {GalleryItems.map((item, index) => (
-            <motion.div
-              key={item.id}
-              variants={cardVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ amount: 0.5 }} // Trigger when 50% of the item is in view
-              transition={{ delay: index * 0.2, duration: 0.5 }} // Staggered delay
-              className={`${item.className} bg-secondary rounded-lg shadow-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow duration-300`}
-            >
-              {/* Image */}
-              <div className="h-full w-full overflow-hidden">
+      {/* Bento Grid Container */}
+      <div className="flex-1  pb-8 overflow-hidden">
+        <div className="h-full max-w-6xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-3 h-full gap-2">
+            {GalleryItems.map((item, index) => (
+              <motion.div
+                key={item.id}
+                variants={cardVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ delay: index * 0.1, duration: 0.3 }}
+                className={`${item.className} overflow-hidden rounded-lg bg-black`}
+                onClick={() => setSelectedImage(item.image)}
+              >
                 <img
                   src={item.image}
-                  alt={item.title}
-                  className="w-full h-full object-cover"
+                  alt=""
+                  className="w-full h-full object-cover cursor-pointer hover:opacity-90 transition-opacity"
+                  loading="lazy"
                 />
-              </div>
-
-              {/* Content */}
-              <div className="p-6">
-                <h2 className="text-2xl font-bold text-white mb-2">
-                  {item.title}
-                </h2>
-                <p className="text-gray-500">{item.description}</p>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
+
+      {/* Fullscreen Viewer */}
+      {selectedImage && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="fixed inset-0 bg-black z-50 flex items-center justify-center p-2"
+          onClick={() => setSelectedImage(null)}
+        >
+          <div className="relative w-full h-full flex items-center justify-center">
+            <motion.img
+              src={selectedImage}
+              alt=""
+              className="max-w-full max-h-full object-contain"
+              initial={{ scale: 0.95 }}
+              animate={{ scale: 1 }}
+            />
+            <button
+              className="absolute top-4 right-4 text-white text-3xl bg-black bg-opacity-50 rounded-full w-10 h-10 flex items-center justify-center"
+              onClick={(e) => {
+                e.stopPropagation();
+                setSelectedImage(null);
+              }}
+            >
+              &times;
+            </button>
+          </div>
+        </motion.div>
+      )}
     </div>
   );
 };

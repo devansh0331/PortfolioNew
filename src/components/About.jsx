@@ -16,11 +16,8 @@ const About = () => {
               <h1 className="text-6xl text-white font-bold mb-4">
                 Hello <span className="text-contrast">World</span> !
               </h1>
-              <p className="text-lg text-gray-300 mb-6">
-                I'm a passionate developer and designer, dedicated to creating
-                meaningful and impactful solutions. With a love for coding and
-                problem-solving, I strive to make the world a better place
-                through technology.
+              <p className="text-md text-justify text-gray-300 mb-6">
+               A technology innovator with a strong focus on blockchain, development, and secure communication systems. Experienced in designing decentralized platforms, implementing advanced cryptographic protocols, and conducting research on UAV communication security. Passionate about applying solutions to build valuable technologies.
               </p>
               {/* Download Resume Button */}
               <a
