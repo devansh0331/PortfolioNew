@@ -4,34 +4,34 @@ import project1 from "../assets/drone.jpeg"; // Replace with your project images
 import project2 from "../assets/drone.jpeg";
 import project3 from "../assets/drone.jpeg";
 import { FiGithub, FiExternalLink } from "react-icons/fi";
-import { FaReact, FaNodeJs, FaEthereum } from "react-icons/fa";
-import { SiSolidity, SiTailwindcss, SiFirebase, SiMongodb } from "react-icons/si";
+import { FaReact, FaNodeJs, FaEthereum, FaPython, FaLock } from "react-icons/fa";
+import { SiSolidity, SiTailwindcss, SiFirebase, SiMongodb, SiFlask } from "react-icons/si";
 
 const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
 
   // Projects data
   const projects = [
-    {
-      title: "Decentralized Solar Energy Trading Platform",
-      description:
-        "A peer-to-peer energy trading platform using blockchain technology to enable direct transactions between solar energy producers and consumers.",
-      image: project1,
-      technologies: [
-        { name: "React", icon: <FaReact className="text-blue-400" /> },
-        { name: "Solidity", icon: <SiSolidity className="text-gray-300" /> },
-        { name: "Ethereum", icon: <FaEthereum className="text-purple-400" /> },
-      ],
-      features: [
-        "Smart contracts for secure energy transactions",
-        "Real-time energy tracking dashboard",
-        "Token-based payment system",
-        "70% more secure than traditional systems",
-      ],
-      // githubUrl: "https://github.com/devansh0331/Solar-E-Corp.git",
-      liveUrl: "https://solar-e-corp.vercel.app/",
-      category: "Blockchain",
-    },
+      {
+        title: "Decentralized Solar Energy Trading Platform",
+        description:
+          "A peer-to-peer energy trading platform using blockchain technology to enable direct transactions between solar energy producers and consumers.",
+        image: project1,
+        technologies: [
+          { name: "React", icon: <FaReact className="text-blue-400" /> },
+          { name: "Solidity", icon: <SiSolidity className="text-gray-300" /> },
+          { name: "Ethereum", icon: <FaEthereum className="text-purple-400" /> },
+        ],
+        features: [
+          "Smart contracts for secure energy transactions",
+          "Real-time energy tracking dashboard",
+          "Token-based payment system",
+          "70% more secure than traditional systems",
+        ],
+        // githubUrl: "https://github.com/devansh0331/Solar-E-Corp.git",
+        liveUrl: "https://solar-e-corp.vercel.app/",
+        category: "Blockchain",
+      },
    /* {
       title: "Quantum-Secure UAV Communication",
       description:
@@ -82,6 +82,27 @@ const Projects = () => {
       liveUrl: "https://veldora-nft.vercel.app/",
       category: "Blockchain",
     },
+    {
+      title: "Secret Steganography Tool",
+      description:
+        "A Flask-based web application that allows users to hide and extract secret messages inside images, with optional AES-256 encryption for enhanced security.",
+      image: project2,
+      technologies: [
+        { name: "Flask", icon: <SiFlask className="text-gray-400" /> },
+        { name: "Python", icon: <FaPython className="text-yellow-400" /> },
+        { name: "AES-256", icon: <FaLock className="text-green-400" /> },
+      ],
+      features: [
+        "Upload images (.png, .jpg, .jpeg) for message hiding/extraction",
+        "AES-256 encryption for added message security",
+        "Simple and intuitive web interface",
+        "Instant message retrieval with decryption",
+      ],
+      // githubUrl: "https://github.com/devansh0331/Steganography-App.git",
+      liveUrl: "https://stagenography.up.railway.app",
+      category: "Cryptography",
+},
+
     {
       title: "Medc",
       description:
@@ -220,7 +241,7 @@ const Projects = () => {
                   {project.technologies.map((tech, i) => (
                     <div
                       key={i}
-                      className="flex items-center gap-1 px-2 py-1 bg-primary rounded-md text-xs"
+                      className="flex items-center gap-1 px-2 py-1 bg-primary rounded-md text-xs text-gray-500"
                     >
                       {tech.icon}
                       <span>{tech.name}</span>
